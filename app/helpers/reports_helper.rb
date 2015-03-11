@@ -40,6 +40,7 @@ module ReportsHelper
     report.pages.each do |page|
 
 
+
       page.questions.each do |question|
         headers.push(question.title)
         
