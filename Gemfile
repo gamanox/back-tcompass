@@ -47,7 +47,7 @@ gem 'mailcatcher'
 
 # Use Rspec as the testing framework. Read more: https://github.com/rspec/rspec-rails
 gem 'rspec-rails', '~> 3.0',group: [:development, :test]
-
+gem 'rails_admin'
 # Use unicorn as the app server
 # gem 'unicorn'
 

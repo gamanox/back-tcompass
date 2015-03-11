@@ -25,7 +25,7 @@ Rails.application.routes.draw do
           post "", to: "messages#comment"
         end
       end
-      resources :employees, only: [:destroy,:show,:update] do
+      resources :employees, only: [:index,:show,:destroy,:update] do
         collection do
           post "locations",  to: "users#employee_location"
           post 'shifts', to: 'employees#shifts'
@@ -67,4 +67,9 @@ Rails.application.routes.draw do
       get "users/employees", to: 'users#employees'
     end
   end
+
+
+
+
+
 end

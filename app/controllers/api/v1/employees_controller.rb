@@ -6,7 +6,8 @@ module Api
 
       def show
         begin
-          @employee = current_user.employees.find(params[:id])
+          #@employee = current_user.employees.find(params[:id])
+          @employee = User.find(params[:id])
           if params[:date_filter]
             filter_by_date([@employee],params[:date_filter])
           end

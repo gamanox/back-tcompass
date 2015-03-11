@@ -11,7 +11,7 @@ class Response < ActiveRecord::Base
     elsif self.question_type == 2
       self.multiple_resp.join(",")
     elsif self.question_type == 5
-      self.bool_resp
+      self.bool_resp? ? 'Sí' : 'No'
     elsif self.question_type == 6
       ENV['SERVER_HOST']+self.image_resp.url
     end

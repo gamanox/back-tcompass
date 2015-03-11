@@ -43,7 +43,8 @@ module Api
 
       def show
         begin
-          @report = current_user.reports.find(params[:id])
+          # @report = current_user.reports.find(params[:id])
+          @report = Report.find(params[:id])
           @report.pages.each do |p|
             p.questions.each do |q|
               q.filter_responses(params[:user_id],params[:branch_id],params[:date_filter])
@@ -125,6 +126,8 @@ module Api
       def export
         begin
           @report = current_user.reports.find(params[:id])
+          @userResponses = UserReport.select(:user_id).where(report_id: params[:id])
+          print current_user.name
           if params[:date_filter]
             @report.pages.each do |p|
               p.questions.each do |q|
@@ -141,8 +144,13 @@ module Api
           end
           if params[:type] = "csv"
             response_json = create_csv(@report)
+            
           end
           render json: {data: response_json},status: :ok
+          # render csv: {data: response_json},status: :ok
+          # send_data(response_json,
+          #   :type => 'text/csv; charset=utf-8;',
+          #   :filename => "myfile.csv")
         rescue => invalid
           logger.error invalid
           render json: {error: "Problem exporting report"},
