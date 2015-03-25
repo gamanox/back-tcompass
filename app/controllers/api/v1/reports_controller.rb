@@ -87,7 +87,7 @@ module Api
           @branch = Branch.find(params[:report][:branch_id])
           params[:report][:pages].each do |page|
             page[:responses].each do |res|
-              if res[:question_type] == 6
+              if res[:question_type] == 6 || res[:question_type] == 8
                 decode_image(res)
               end
               created_resp = current_user.responses.create!(response_params(res))

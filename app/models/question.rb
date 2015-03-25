@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
       self.multiple_option_responses(self.question_type)
     elsif self.question_type == 5
       self.boolean_option_responses
-    elsif self.question_type == 6
+    elsif self.question_type == 6 || self.question_type == 8
       self.image_option_response
     elsif self.question_type == 7
       self.matrix_option_response
