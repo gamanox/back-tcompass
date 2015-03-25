@@ -1,0 +1,344 @@
+model Netser
+
+-- classes
+
+class Administrator
+attributes
+ id : Integer
+ client_id : Integer
+ employee_id : Integer
+
+end
+
+class Branch
+attributes
+ id : Integer
+ user_id : Integer
+ name : String
+ address : String
+ latlng : String
+ description : String
+ phone : String
+ email : String
+ is_active : Boolean
+
+end
+
+class BranchResponse
+attributes
+ id : Integer
+ branch_id : Integer
+ response_id : Integer
+
+end
+
+class EmployeeLocation
+attributes
+ id : Integer
+ user_id : Integer
+ latlng : String
+ location_type : Integer
+
+end
+
+class Group
+attributes
+ id : Integer
+ user_id : Integer
+ name : String
+
+end
+
+class GroupBranch
+attributes
+ id : Integer
+ group_id : Integer
+ branch_id : Integer
+
+end
+
+class GroupReport
+attributes
+ id : Integer
+ group_id : Integer
+ report_id : Integer
+
+end
+
+class GroupsUser
+attributes
+ id : Integer
+ user_id : Integer
+ group_id : Integer
+
+end
+
+class Location
+attributes
+
+end
+
+class Message
+attributes
+ id : Integer
+ comment_id : Integer
+ content : String
+ user_id : Integer
+ title : String
+ is_read : Boolean
+
+end
+
+class MessageGroup
+attributes
+ id : Integer
+ group_id : Integer
+ message_id : Integer
+
+end
+
+class MessageStatus
+attributes
+ id : Integer
+ message_id : Integer
+ user_ids : Integer
+
+end
+
+class Page
+attributes
+ id : Integer
+ report_id : Integer
+ title : String
+
+end
+
+class Question
+attributes
+ id : Integer
+ page_id : Integer
+ question_type : Integer
+ title : String
+ options : String
+ skus : String
+
+end
+
+class Report
+attributes
+ id : Integer
+ user_id : Integer
+ title : String
+ description : String
+ is_active : Boolean
+
+end
+
+class Response
+attributes
+ id : Integer
+ question_id : Integer
+ user_id : Integer
+ question_type : Integer
+ single_resp : String
+ multiple_resp : String
+ bool_resp : Boolean
+ image_resp : String
+
+end
+
+class User
+attributes
+ id : Integer
+ client_id : Integer
+ employee_id : Integer
+ name : String
+ last_name : String
+ address : String
+ location : String
+ qty_reports : Integer
+ qty_employees : Integer
+ email : String
+ password_digest : String
+ token : String
+ qty_branches : Integer
+ soft_ver : String
+ phone : String
+ is_active : Boolean
+
+end
+
+class UserReport
+attributes
+ id : Integer
+ user_id : Integer
+ report_id : Integer
+ branch_id : Integer
+
+end
+
+association BranchBranchResponses between
+	Branch[1] role branch_responses_branch
+	BranchResponse[*] role branch_responses
+end
+
+association BranchResponses between
+	Branch[1] role responses_branch
+	Response[*] role responses
+end
+
+association BranchGroupBranches between
+	Branch[1] role group_branches_branch
+	GroupBranch[*] role group_branches
+end
+
+association BranchGroupReports between
+	Branch[1] role group_reports_branch
+	GroupReport[*] role group_reports
+end
+
+association BranchUserReports between
+	Branch[1] role user_reports_branch
+	UserReport[*] role user_reports
+end
+
+association GroupGroupsUsers between
+	Group[1] role groups_users_group
+	GroupsUser[*] role groups_users
+end
+
+association GroupUsers between
+	Group[1] role users_group
+	User[*] role users
+end
+
+association GroupMessageGroups between
+	Group[1] role message_groups_group
+	MessageGroup[*] role message_groups
+end
+
+association GroupMessages between
+	Group[1] role messages_group
+	Message[*] role messages
+end
+
+association GroupGroupReports between
+	Group[1] role group_reports_group
+	GroupReport[*] role group_reports
+end
+
+association GroupReports between
+	Group[1] role reports_group
+	Report[*] role reports
+end
+
+association GroupGroupBranches between
+	Group[1] role group_branches_group
+	GroupBranch[*] role group_branches
+end
+
+association GroupBranches between
+	Group[1] role branches_group
+	Branch[*] role branches
+end
+
+association MessageMessageGroups between
+	Message[1] role message_groups_message
+	MessageGroup[*] role message_groups
+end
+
+association MessageComments between
+	Message[1] role comments_message
+	Message[*] role comments
+end
+
+association MessageMessageStatus between
+	Message[1] role message_status_message
+	MessageStatus[1] role message_status
+end
+
+association PageQuestions between
+	Page[1] role questions_page
+	Question[*] role questions
+end
+
+association QuestionResponses between
+	Question[1] role responses_question
+	Response[*] role responses
+end
+
+association ReportGroupReports between
+	Report[1] role group_reports_report
+	GroupReport[*] role group_reports
+end
+
+association ReportGroups between
+	Report[1] role groups_report
+	Group[*] role groups
+end
+
+association ReportPages between
+	Report[1] role pages_report
+	Page[*] role pages
+end
+
+association ResponseBranchResponses between
+	Response[1] role branch_responses_response
+	BranchResponse[*] role branch_responses
+end
+
+association UserMessages between
+	User[1] role messages_user
+	Message[*] role messages
+end
+
+association UserGroups between
+	User[1] role groups_user
+	Group[*] role groups
+end
+
+association UserGroupsUsers between
+	User[1] role groups_users_user
+	GroupsUser[*] role groups_users
+end
+
+association UserClients between
+	User[1] role clients_user
+	User[*] role clients
+end
+
+association UserEmployees between
+	User[1] role employees_user
+	User[*] role employees
+end
+
+association UserBranches between
+	User[1] role branches_user
+	Branch[*] role branches
+end
+
+association UserAdministrators between
+	User[1] role administrators_user
+	Administrator[*] role administrators
+end
+
+association UserReports between
+	User[1] role reports_user
+	Report[*] role reports
+end
+
+association UserEmployeeLocations between
+	User[1] role employee_locations_user
+	EmployeeLocation[*] role employee_locations
+end
+
+association UserResponses between
+	User[1] role responses_user
+	Response[*] role responses
+end
+
+association UserUserReports between
+	User[1] role user_reports_user
+	UserReport[*] role user_reports
+end
+
