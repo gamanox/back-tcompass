@@ -60,6 +60,7 @@ Rails.application.routes.draw do
           post "toggle",to: 'reports#toggle_is_active'
           post "groups",to: 'reports#assign_groups'
           get "export",to: 'reports#export'
+          get "individual",to: 'reports#reporte_ind'
         end
       end
       post "signup", to: "sessions#signup"

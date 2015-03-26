@@ -51,5 +51,12 @@ gem 'rails_admin'
 # Use unicorn as the app server
 # gem 'unicorn'
 
+gem 'railroady', group: [:development, :test]
+gem "rails-erd", group: [:development, :test]
+gem 'rails2use', group: [:development, :test]
+gem 'umlify', group: [:development, :test]
+
+	
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]

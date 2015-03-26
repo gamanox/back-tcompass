@@ -28,7 +28,7 @@ module ReportsHelper
     
     report.pages.first.questions.first.responses.each do |respuesta|
       place = BranchResponse.find_by_response_id(Response.find(respuesta.id)).branch.name
-      puts respuesta.to_yaml
+      # puts respuesta.to_yaml
       fullname= respuesta.user.name+" "+respuesta.user.last_name
       empleados.push(fullname)
       places.push(place)
