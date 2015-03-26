@@ -67,8 +67,8 @@ module Api
       end
       def show
         begin
-          @report = current_user.reports.find(params[:id])
-          
+          # @report = current_user.reports.find(params[:id])
+          @report = Report.find(params[:id])
           @report.pages.each do |p|
             p.questions.each do |q|
               q.filter_responses(params[:user_id],params[:branch_id],params[:date_filter])
