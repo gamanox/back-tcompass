@@ -40,11 +40,35 @@ module Api
             status: :internal_server_error
         end
       end
+      def reporte_ind
+        begin
+          date=params[:date_filter]
+          puts date.to_yaml
+          @userdata = {
+            full_name: User.find(params[:user_id]).name+" "+User.find(params[:user_id]).last_name,
+            group: GroupsUser.find_by_user_id(params[:user_id]).group.name,
+            branch: Branch.find(params[:branch_id]).name,
+            date: date
+          }
+          resp_json = @userdata
 
+          render json: {user: resp_json},status: :ok
+        
+        rescue ActiveRecord::RecordInvalid => invalid
+          message = invalid.record.errors.messages[:qty_reports].first
+          logger.error message
+          render json: {error: message},status: :internal_server_error
+        
+        rescue => invalid
+          logger.error invalid
+          render json: {error: "Problem fetching report info"},
+            status: :internal_server_error
+        end
+      end
       def show
         begin
-          # @report = current_user.reports.find(params[:id])
-          @report = Report.find(params[:id])
+          @report = current_user.reports.find(params[:id])
+          
           @report.pages.each do |p|
             p.questions.each do |q|
               q.filter_responses(params[:user_id],params[:branch_id],params[:date_filter])
